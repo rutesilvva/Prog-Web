@@ -1,0 +1,157 @@
+<nav class="topnav">
+  <div class="container">
+    <div class="dropdown"
+         (mouseenter)="catOpen=true" (mouseleave)="catOpen=false"
+         (focusin)="catOpen=true" (focusout)="catOpen=false">
+      <button class="nav-btn"
+              (click)="catOpen = !catOpen"
+              aria-haspopup="true"
+              [attr.aria-expanded]="catOpen">
+        Categorias
+        <span class="material-icons chev">expand_more</span>
+      </button>
+
+      <div class="panel" [class.open]="catOpen" role="menu">
+        <ul class="grid">
+          <li *ngFor="let c of categories">
+            <a [routerLink]="'/catalog'" [queryParams]="{ cat: c.code }" (click)="closeCats()">
+              <span class="dot"></span>{{ c.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <ul class="mainlinks">
+      <li><a routerLink="/catalog">Catálogo</a></li>
+      <li><a routerLink="/pages/about">Sobre</a></li>
+      <li><a routerLink="/pages/contact">Contato</a></li>
+    </ul>
+
+    <div class="cart-btn">
+      <a routerLink="/cart" aria-label="Ir para o carrinho">
+        <span class="material-icons">shopping_cart</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container grid">
+    <article class="hero-main card">
+      <ng-container *ngFor="let s of slides; let i = index">
+        <div class="slide" [class.active]="i === current" [attr.aria-hidden]="i === current ? 'false':'true'">
+          <div class="badge-price" *ngIf="s.priceBadge">{{ s.priceBadge }}</div>
+          <div class="text">
+            <p class="eyebrow">{{ s.eyebrow }}</p>
+            <h1>{{ s.title }}</h1>
+            <p class="desc">{{ s.desc }}</p>
+            <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
+          </div>
+          <img [src]="s.img" [alt]="s.alt" />
+        </div>
+      </ng-container>
+
+      <div class="dots" role="tablist" aria-label="Slides">
+        <button
+          *ngFor="let _ of slides; let i = index"
+          class="dot"
+          [class.active]="i === current"
+          (click)="goToHero(i)"
+          [attr.aria-selected]="i === current"
+          [attr.aria-label]="'Ir para o slide ' + (i + 1)">
+        </button>
+      </div>
+    </article>
+
+    <div class="hero-side">
+      <article class="side card">
+        <div class="ribbon">-25%</div>
+        <h3>Promoção de Verão</h3>
+        <p>Linux + Shell + Redes</p>
+        <a class="link" routerLink="/catalog" [queryParams]="{cat:'netsec'}">VER OFERTA</a>
+        <img src="/assets/hero/linux-network.png" alt="Linux e Redes" />
+      </article>
+
+      <article class="side card">
+        <h3>Lançamento</h3>
+        <p>“Arquitetura de Software Moderna”</p>
+        <a class="link" routerLink="/product/arquitetura-software-moderna">SAIBA MAIS</a>
+        <img src="/assets/hero/arch-modern.png" alt="Arquitetura de Software" />
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="products-carousel">
+  <div class="container">
+    <header class="pc-head">
+      <h2>Em destaque</h2>
+      <div class="controls">
+        <button class="ctrl" (click)="prevProducts()" aria-label="Anterior">
+          <span class="material-icons">chevron_left</span>
+        </button>
+        <button class="ctrl" (click)="nextProducts()" aria-label="Próximo">
+          <span class="material-icons">chevron_right</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="viewport" #prodViewport>
+      <div class="track">
+        <a class="p-card" *ngFor="let p of products"
+           [routerLink]="'/product/' + p.slug" [title]="p.title">
+          <div class="imgwrap">
+            <img [src]="p.img" [alt]="p.title">
+          </div>
+          <h3>{{ p.title }}</h3>
+          <p class="price">{{ p.price | currency:'BRL':'symbol-narrow':'1.2-2' }}</p>
+          <span class="cta">ver</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="benefits">
+  <div class="container">
+    <h3 class="benefits-title">Aproveite estes benefícios exclusivos:</h3>
+    <div class="benefits-row">
+
+      <div class="benefit">
+        <span class="material-icons icon">local_shipping</span>
+        <span>Entrega Rápida – Envio em até 24h</span>
+      </div>
+
+      <div class="benefit">
+        <span class="material-icons icon">autorenew</span>
+        <span>Troca em 14 dias – Garantia de satisfação</span>
+      </div>
+
+      <div class="benefit">
+        <span class="material-icons icon">verified_user</span>
+        <span>Pagamento Seguro – PIX & Cartão</span>
+      </div>
+
+      <div class="benefit">
+        <span class="material-icons icon">headset_mic</span>
+        <span>Suporte 24h por dia, 7 dias por semana – Atendimento da editora</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-links">
+      <a routerLink="/pages/terms">Termos de Uso</a>
+      <a routerLink="/pages/returns">Política de Trocas</a>
+      <a routerLink="/pages/shipping">Política de Envio</a>
+      <a routerLink="/pages/privacy">Privacidade</a>
+    </div>
+    <div class="copy">
+      © {{ year }} – Editora de Computação. Todos os direitos reservados.
+    </div>
+  </div>
+</footer>

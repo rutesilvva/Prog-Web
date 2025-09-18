@@ -1,0 +1,55 @@
+import { Routes } from '@angular/router';
+
+export const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+
+  { path: 'home',
+    loadComponent: () =>
+      import('./features/home/home.component').then(m => m.HomeComponent),
+    title: 'Home'
+  },
+
+  { path: 'catalog',
+    loadComponent: () =>
+      import('./features/catalog/catalog-page/catalog-page.component')
+        .then(m => m.CatalogPageComponent),
+    title: 'Catálogo'
+  },
+
+  { path: 'product/:slug',
+    loadComponent: () =>
+      import('./features/catalog/product-detail-page/product-detail-page.component')
+        .then(m => m.ProductDetailPageComponent),
+    title: 'Produto'
+  },
+
+  { path: 'cart',
+    loadComponent: () =>
+      import('./features/cart/cart-page/cart-page.component')
+        .then(m => m.CartPageComponent),
+    title: 'Carrinho'
+  },
+
+  { path: 'checkout',
+    loadComponent: () =>
+      import('./features/checkout/checkout-page/checkout-page.component')
+        .then(m => m.CheckoutPageComponent),
+    title: 'Checkout'
+  },
+
+  { path: 'account',
+    loadComponent: () =>
+      import('./features/account/profile-page/profile-page.component')
+        .then(m => m.ProfilePageComponent),
+    title: 'Minha Conta'
+  },
+
+  { path: 'login',
+    loadComponent: () =>
+      import('./features/account/login-page/login-page.component')
+        .then(m => m.LoginPageComponent),
+    title: 'Entrar'
+  },
+
+  { path: '**', redirectTo: 'home' }
+];
