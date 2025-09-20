@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { ShippingCalcComponent } from '../shipping-calc/shipping-calc.component';
 import { CartService, CartItem } from '../../../../core/services/cart.service';
 
+
+
+
 @Component({
   selector: 'app-checkout-page',
   standalone: true,
