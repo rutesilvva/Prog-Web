@@ -1,0 +1,29 @@
+<section class="shipping container">
+  <h2>Calcular Frete</h2>
+
+  <div class="form-inline">
+    <input
+      type="text"
+      [(ngModel)]="cep"
+      placeholder="Digite seu CEP"
+      maxlength="9"
+    />
+    <button class="btn" (click)="calcShipping()" [disabled]="loading">
+      {{ loading ? 'Calculando...' : 'Calcular' }}
+    </button>
+  </div>
+
+  <form *ngIf="options.length > 0" class="options">
+    <label *ngFor="let o of options" class="option">
+      <input
+        type="radio"
+        name="frete"
+        [value]="o.price"
+        (change)="selectOption(o.price)"
+      />
+      <span class="type">{{ o.type }}</span>
+      <span class="deadline">{{ o.deadline }}</span>
+      <span class="price">{{ o.price | currency:'BRL' }}</span>
+    </label>
+  </form>
+</section>

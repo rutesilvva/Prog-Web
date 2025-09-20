@@ -1,6 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { CartService } from '../../../core/services/cart.service';
+
 
 interface HeroSlide {
   eyebrow: string;
@@ -29,6 +31,8 @@ interface Product {
 })
 export class HomeComponent implements OnInit, OnDestroy {
   year = new Date().getFullYear();
+    constructor(private cartService: CartService) {}
+
 
   slides: HeroSlide[] = [
     {
@@ -111,4 +115,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   prevProducts() {
     this.prodIndex = (this.prodIndex - 1 + this.products.length) % this.products.length;
   }
+
+  addToCart(p: any) {
+  this.cartService.addToCart(p);
+  // feedback simples
+  // (use um snackbar/toast se quiser)
+  alert(`${p.title} foi adicionado ao carrinho!`);
+}
 }

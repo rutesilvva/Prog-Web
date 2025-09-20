@@ -1,1 +1,33 @@
-<p>profile-page works!</p>
+<section class="profile container">
+  <h1>Minha Conta</h1>
+
+  <div class="profile-info card">
+    <h2>Dados Pessoais</h2>
+    <p><strong>Nome:</strong> {{ user.name }}</p>
+    <p><strong>E-mail:</strong> {{ user.email }}</p>
+    <p><strong>Telefone:</strong> {{ user.phone }}</p>
+    <a class="btn" routerLink="/account/edit">Editar Perfil</a>
+  </div>
+
+  <div class="orders card">
+    <h2>Meus Pedidos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Data</th>
+          <th>Total</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let o of orders">
+          <td>{{ o.id }}</td>
+          <td>{{ o.date }}</td>
+          <td>{{ o.total | currency:'BRL':'symbol-narrow' }}</td>
+          <td>{{ o.status }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

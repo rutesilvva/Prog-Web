@@ -1,1 +1,41 @@
-<p>login-page works!</p>
+<section class="login">
+  <div class="container">
+    <h1>Entrar</h1>
+    <p>Acesse sua conta para continuar.</p>
+
+    <form class="login-form" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input
+          id="email"
+          type="email"
+          [(ngModel)]="email"
+          name="email"
+          placeholder="Digite seu e-mail"
+          required
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input
+          id="password"
+          type="password"
+          [(ngModel)]="password"
+          name="password"
+          placeholder="Digite sua senha"
+          required
+        />
+      </div>
+
+      <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+
+      <button type="submit" class="btn">Entrar</button>
+    </form>
+
+    <div class="extra">
+      <a routerLink="/account">Esqueceu sua senha?</a>
+      <a routerLink="/account">Criar conta</a>
+    </div>
+  </div>
+</section>

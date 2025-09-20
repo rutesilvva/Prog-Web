@@ -1,0 +1,57 @@
+<section class="payment container">
+  <h1>Pagamento</h1>
+  <p>Escolha uma forma de pagamento para finalizar sua compra.</p>
+
+  <form (ngSubmit)="confirmPayment()">
+    <div class="form-group">
+      <label>
+        <input type="radio" name="method" value="pix" [(ngModel)]="selectedMethod">
+        Pix
+      </label>
+      <p class="hint">Escaneie o QR Code na próxima tela.</p>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <input type="radio" name="method" value="boleto" [(ngModel)]="selectedMethod">
+        Boleto Bancário
+      </label>
+      <p class="hint">Geraremos um boleto com vencimento de 3 dias úteis.</p>
+    </div>
+
+    <div class="form-group">
+      <label>
+        <input type="radio" name="method" value="card" [(ngModel)]="selectedMethod">
+        Cartão de Crédito/Débito
+      </label>
+    </div>
+
+    <!-- Campos do cartão -->
+    <div *ngIf="selectedMethod === 'card'" class="card-form">
+      <div class="form-group">
+        <label>Número do Cartão</label>
+        <input type="text" [(ngModel)]="cardData.number" name="cardNumber" maxlength="16">
+      </div>
+      <div class="form-group">
+        <label>Nome impresso</label>
+        <input type="text" [(ngModel)]="cardData.name" name="cardName">
+      </div>
+      <div class="form-inline">
+        <div class="form-group">
+          <label>Validade</label>
+          <input type="text" [(ngModel)]="cardData.expiry" name="cardExpiry" placeholder="MM/AA">
+        </div>
+        <div class="form-group">
+          <label>CVV</label>
+          <input type="text" [(ngModel)]="cardData.cvv" name="cardCvv" maxlength="4">
+        </div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn">Confirmar Pagamento</button>
+  </form>
+
+  <p class="back">
+    <a routerLink="/checkout">← Voltar ao checkout</a>
+  </p>
+</section>

@@ -111,19 +111,23 @@
     background: #1b6fb8;
   }
 }
-
-/* Carrinho */
 .cart-btn {
-  margin-left: auto;
+  position: relative;
 
-  a {
+  .material-icons {
+    font-size: 26px;
     color: #fff;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
+  }
 
-    .material-icons {
-      font-size: 28px;
-    }
+  .badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background: #ff7a00;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 50%;
   }
 }

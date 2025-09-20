@@ -31,9 +31,11 @@
     </ul>
 
     <div class="cart-btn">
-      <a routerLink="/cart" aria-label="Carrinho">
-        <span class="material-icons">shopping_cart</span>
-      </a>
-    </div>
+  <a routerLink="/cart" aria-label="Carrinho">
+    <span class="material-icons">shopping_cart</span>
+    <span class="badge" *ngIf="totalQty">{{ totalQty }}</span>
+  </a>
+</div>
+
   </div>
 </header>

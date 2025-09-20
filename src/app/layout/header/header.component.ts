@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
+import { CartService } from '../../../core/services/cart.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -9,8 +9,9 @@ import { RouterLink } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   catOpen = false;
+  totalQty = 0;
 
   categories = [
     { label: 'IA e Machine Learning', code: 'ia-ml' },
@@ -21,6 +22,14 @@ export class HeaderComponent {
     { label: 'Sistemas e Arquitetura', code: 'arch' },
     { label: 'Banco de Dados', code: 'db' }
   ];
+
+  constructor(private cartService: CartService) {}
+
+  ngOnInit() {
+    this.cartService.cartItems.subscribe(items => {
+      this.totalQty = items.reduce((sum, i) => sum + i.quantity, 0);
+    });
+  }
 
   closeCats() {
     this.catOpen = false;

@@ -42,17 +42,25 @@
     <aside class="checkout-summary">
       <h2>Resumo do Pedido</h2>
 
+      <div class="alert success" *ngIf="orderConfirmed">
+        ✅ Pedido confirmado com sucesso! Obrigado por comprar conosco.
+      </div>
+
       <div class="summary-item" *ngFor="let item of cartItems">
         <span>{{ item.title }}</span>
-        <span>{{ item.price | currency:'BRL':'symbol-narrow':'1.2-2' }}</span>
+        <span>
+          {{ (item.price * item.quantity) | currency:'BRL':'symbol-narrow':'1.2-2' }}
+        </span>
       </div>
+
+      <app-shipping-calc (freightSelected)="onFreightSelected($event)"></app-shipping-calc>
 
       <div class="summary-total">
         <strong>Total:</strong>
         <strong>{{ total | currency:'BRL':'symbol-narrow':'1.2-2' }}</strong>
       </div>
 
-      <button class="btn-confirm">Confirmar Pedido</button>
+      <button class="btn-confirm" (click)="confirmOrder()">Confirmar Pedido</button>
     </aside>
   </div>
 </section>
