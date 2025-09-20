@@ -66,5 +66,14 @@ export const routes: Routes = [
     title: 'Sobre'
   },
 
+  {
+  path: 'contact',
+  loadComponent: () =>
+    import('./features/contact/contact-page/contact-page.component')
+      .then(m => m.ContactPageComponent),
+  title: 'Contato'
+}
+,
+
   { path: '**', redirectTo: 'home' }
 ];

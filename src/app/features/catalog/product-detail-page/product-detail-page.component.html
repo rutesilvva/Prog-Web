@@ -1,1 +1,21 @@
-<p>product-detail-page works!</p>
+<section class="product-detail">
+  <div class="container grid">
+    <div class="image-wrap">
+      <img [src]="product.img" [alt]="product.title" />
+    </div>
+
+    <div class="info">
+      <h1>{{ product.title }}</h1>
+      <p class="price">{{ product.price | currency:'BRL' }}</p>
+      <p class="desc">{{ product.description }}</p>
+
+      <div class="actions">
+        <input type="number" [(ngModel)]="qty" min="1" />
+        <button class="btn" (click)="addToCart()">
+          <span class="material-icons">add_shopping_cart</span>
+          Adicionar ao Carrinho
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

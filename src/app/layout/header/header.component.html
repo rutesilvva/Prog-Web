@@ -1,1 +1,39 @@
-<p>header works!</p>
+<header class="topnav">
+  <div class="container">
+    <a class="logo" routerLink="/home">Editora</a>
+
+    <div class="dropdown"
+         (mouseenter)="catOpen=true" (mouseleave)="catOpen=false"
+         (focusin)="catOpen=true" (focusout)="catOpen=false">
+      <button class="nav-btn"
+              (click)="catOpen = !catOpen"
+              aria-haspopup="true"
+              [attr.aria-expanded]="catOpen">
+        Categorias
+        <span class="material-icons chev">expand_more</span>
+      </button>
+
+      <div class="panel" [class.open]="catOpen" role="menu">
+        <ul class="grid">
+          <li *ngFor="let c of categories">
+            <a [routerLink]="'/catalog'" [queryParams]="{ cat: c.code }" (click)="closeCats()">
+              <span class="dot"></span>{{ c.label }}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <ul class="mainlinks">
+      <li><a routerLink="/catalog">Catálogo</a></li>
+      <li><a routerLink="/about">Sobre</a></li>
+      <li><a routerLink="/contact">Contato</a></li>
+    </ul>
+
+    <div class="cart-btn">
+      <a routerLink="/cart" aria-label="Carrinho">
+        <span class="material-icons">shopping_cart</span>
+      </a>
+    </div>
+  </div>
+</header>

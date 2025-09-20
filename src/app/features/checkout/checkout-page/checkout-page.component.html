@@ -1,1 +1,58 @@
-<p>checkout-page works!</p>
+<section class="checkout container">
+  <h1>Finalizar Compra</h1>
+  <p class="subtitle">Revise seus dados e confirme o pedido</p>
+
+  <div class="checkout-grid">
+    <form class="checkout-form">
+      <h2>Dados do Cliente</h2>
+
+      <label>
+        Nome Completo
+        <input type="text" placeholder="Digite seu nome" required />
+      </label>
+
+      <label>
+        Email
+        <input type="email" placeholder="Digite seu e-mail" required />
+      </label>
+
+      <label>
+        Endereço
+        <input type="text" placeholder="Rua, número e bairro" required />
+      </label>
+
+      <label>
+        Cidade
+        <input type="text" placeholder="Digite sua cidade" required />
+      </label>
+
+      <label>
+        CEP
+        <input type="text" placeholder="00000-000" required />
+      </label>
+
+      <h2>Forma de Pagamento</h2>
+      <div class="payment-methods">
+        <label><input type="radio" name="payment" checked /> PIX</label>
+        <label><input type="radio" name="payment" /> Cartão de Crédito</label>
+        <label><input type="radio" name="payment" /> Boleto Bancário</label>
+      </div>
+    </form>
+
+    <aside class="checkout-summary">
+      <h2>Resumo do Pedido</h2>
+
+      <div class="summary-item" *ngFor="let item of cartItems">
+        <span>{{ item.title }}</span>
+        <span>{{ item.price | currency:'BRL':'symbol-narrow':'1.2-2' }}</span>
+      </div>
+
+      <div class="summary-total">
+        <strong>Total:</strong>
+        <strong>{{ total | currency:'BRL':'symbol-narrow':'1.2-2' }}</strong>
+      </div>
+
+      <button class="btn-confirm">Confirmar Pedido</button>
+    </aside>
+  </div>
+</section>

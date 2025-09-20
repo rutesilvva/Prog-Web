@@ -1,1 +1,53 @@
-<p>cart-page works!</p>
+<section class="cart-page">
+  <div class="container">
+    <h1>Meu Carrinho</h1>
+
+    <!-- Caso esteja vazio -->
+    <div *ngIf="cart.length === 0" class="empty">
+      <span class="material-icons">shopping_cart</span>
+      <p>Seu carrinho está vazio.</p>
+      <a routerLink="/catalog" class="btn">Ver Catálogo</a>
+    </div>
+
+    <!-- Caso tenha itens -->
+    <div *ngIf="cart.length > 0" class="cart-content">
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Preço</th>
+            <th>Qtd.</th>
+            <th>Total</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cart; let i = index">
+            <td class="prod">
+              <img [src]="item.img" [alt]="item.title" />
+              <span>{{ item.title }}</span>
+            </td>
+            <td>{{ item.price | currency:'BRL' }}</td>
+            <td>
+              <input type="number" [(ngModel)]="item.qty" min="1" />
+            </td>
+            <td>{{ item.price * item.qty | currency:'BRL' }}</td>
+            <td>
+              <button class="remove-btn" (click)="removeItem(i)">
+                <span class="material-icons">delete</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Resumo -->
+      <div class="summary">
+        <p>Subtotal: <strong>{{ getTotal() | currency:'BRL' }}</strong></p>
+        <a routerLink="/checkout" class="btn checkout-btn">
+          Finalizar Compra
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
