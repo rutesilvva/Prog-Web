@@ -1,0 +1,10 @@
+.admin h1 { margin: 16px 0; }
+.card { background:#fff; border:1px solid #e6eefb; border-radius:12px; padding:16px; margin-bottom:16px; }
+.form label { display:block; margin-bottom:10px; }
+.form input { width:100%; padding:8px; border:1px solid #e6eefb; border-radius:8px; }
+.form .inline { display:flex; align-items:center; gap:8px; }
+.actions { display:flex; gap:8px; margin-top:10px; }
+.list table { width:100%; border-collapse:collapse; }
+.list th, .list td { padding:10px; border-bottom:1px solid #eef3fb; }
+.list .ops button { margin-right:6px; }
+.danger { color:#b91c1c; }

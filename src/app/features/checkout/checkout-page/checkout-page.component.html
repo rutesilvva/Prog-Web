@@ -47,13 +47,23 @@
       </div>
 
       <div class="summary-item" *ngFor="let item of cartItems">
-        <span>{{ item.title }}</span>
+        <span>{{ item.title }} (x{{ item.quantity }})</span>
         <span>
           {{ (item.price * item.quantity) | currency:'BRL':'symbol-narrow':'1.2-2' }}
         </span>
       </div>
 
       <app-shipping-calc (freightSelected)="onFreightSelected($event)"></app-shipping-calc>
+
+      <div class="summary-item">
+        <span>Subtotal</span>
+        <span>{{ subtotal | currency:'BRL':'symbol-narrow':'1.2-2' }}</span>
+      </div>
+
+      <div class="summary-item" *ngIf="shippingCost > 0">
+        <span>Frete</span>
+        <span>{{ shippingCost | currency:'BRL':'symbol-narrow':'1.2-2' }}</span>
+      </div>
 
       <div class="summary-total">
         <strong>Total:</strong>

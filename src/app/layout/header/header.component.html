@@ -2,6 +2,7 @@
   <div class="container">
     <a class="logo" routerLink="/home">Editora</a>
 
+    <!-- Botão + Dropdown -->
     <div class="dropdown"
          (mouseenter)="catOpen=true" (mouseleave)="catOpen=false"
          (focusin)="catOpen=true" (focusout)="catOpen=false">
@@ -13,10 +14,13 @@
         <span class="material-icons chev">expand_more</span>
       </button>
 
+      <!-- Painel que abre/fecha -->
       <div class="panel" [class.open]="catOpen" role="menu">
         <ul class="grid">
           <li *ngFor="let c of categories">
-            <a [routerLink]="'/catalog'" [queryParams]="{ cat: c.code }" (click)="closeCats()">
+            <a [routerLink]="'/catalog'" 
+               [queryParams]="{ cat: c.code }" 
+               (click)="closeCats()">
               <span class="dot"></span>{{ c.label }}
             </a>
           </li>
@@ -24,18 +28,19 @@
       </div>
     </div>
 
+    <!-- Links principais -->
     <ul class="mainlinks">
       <li><a routerLink="/catalog">Catálogo</a></li>
       <li><a routerLink="/about">Sobre</a></li>
-    <li><a routerLink="/contact">Contato</a></li>
+      <li><a routerLink="/contact">Contato</a></li>
     </ul>
 
+    <!-- Carrinho -->
     <div class="cart-btn">
-  <a routerLink="/cart" aria-label="Carrinho">
-    <span class="material-icons">shopping_cart</span>
-    <span class="badge" *ngIf="totalQty">{{ totalQty }}</span>
-  </a>
-</div>
-
+      <a routerLink="/cart" aria-label="Carrinho">
+        <span class="material-icons">shopping_cart</span>
+        <span class="badge" *ngIf="totalQty">{{ totalQty }}</span>
+      </a>
+    </div>
   </div>
 </header>

@@ -1,0 +1,46 @@
+<section class="admin container">
+  <h1>Admin • Produtos</h1>
+
+  <form class="card form" (ngSubmit)="save()" #frm="ngForm">
+    <h2>{{ editing ? 'Editar Produto' : 'Novo Produto' }}</h2>
+
+    <label>Título <input [(ngModel)]="f.title" name="title" required /></label>
+    <label>Slug   <input [(ngModel)]="f.slug"  name="slug"  required /></label>
+    <label>Preço  <input type="number" [(ngModel)]="f.price" name="price" required /></label>
+    <label>Imagem <input [(ngModel)]="f.img"   name="img" /></label>
+
+    <label class="inline">
+      <input type="checkbox" [(ngModel)]="f.digital" name="digital" />
+      É e-book?
+    </label>
+    <label *ngIf="f.digital">URL de Download
+      <input [(ngModel)]="f.downloadUrl" name="downloadUrl" />
+    </label>
+
+    <div class="actions">
+      <button type="submit">{{ editing ? 'Salvar' : 'Adicionar' }}</button>
+      <button type="button" (click)="resetForm()">Limpar</button>
+    </div>
+  </form>
+
+  <div class="card list">
+    <h2>Lista</h2>
+    <table>
+      <thead>
+        <tr><th>Título</th><th>Slug</th><th>Preço</th><th>Digital</th><th></th></tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products">
+          <td>{{ p.title }}</td>
+          <td>{{ p.slug }}</td>
+          <td>{{ p.price | currency:'BRL' }}</td>
+          <td>{{ p.digital ? 'Sim' : 'Não' }}</td>
+          <td class="ops">
+            <button (click)="edit(p)">Editar</button>
+            <button class="danger" (click)="remove(p)">Remover</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

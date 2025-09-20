@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
+
 @Component({
   selector: 'app-header',
   standalone: true,

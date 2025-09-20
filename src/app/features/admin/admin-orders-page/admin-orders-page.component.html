@@ -1,0 +1,32 @@
+<section class="admin container">
+  <h1>Admin • Pedidos</h1>
+
+  <div class="card">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th><th>Data</th><th>Itens</th><th>Total</th><th>Status</th><th>Downloads</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let o of orders">
+          <td>{{ o.id | slice:0:8 }}…</td>
+          <td>{{ o.date | date:'short' }}</td>
+          <td>
+            <div *ngFor="let i of o.items">{{ i.title }} × {{ i.quantity }}</div>
+          </td>
+          <td>{{ o.total | currency:'BRL' }}</td>
+          <td>
+            <select [ngModel]="o.status" (ngModelChange)="updateStatus(o, $event)">
+              <option *ngFor="let s of statuses" [ngValue]="s">{{ s }}</option>
+            </select>
+          </td>
+          <td>
+            <a *ngFor="let d of o.downloads" [href]="d.url" target="_blank">{{ d.title }}</a>
+            <span *ngIf="!o.downloads || !o.downloads.length">—</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -4,9 +4,6 @@ import { Router } from '@angular/router';
 import { ShippingCalcComponent } from '../shipping-calc/shipping-calc.component';
 import { CartService, CartItem } from '../../../../core/services/cart.service';
 
-
-
-
 @Component({
   selector: 'app-checkout-page',
   standalone: true,
@@ -28,11 +25,12 @@ export class CheckoutPageComponent {
     });
   }
 
+  get subtotal() {
+    return this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  }
+
   get total() {
-    return (
-      this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0) +
-      this.shippingCost
-    );
+    return this.subtotal + this.shippingCost;
   }
 
   onFreightSelected(price: number) {

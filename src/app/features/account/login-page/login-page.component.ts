@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login-page',
@@ -15,7 +16,10 @@ export class LoginPageComponent {
   password = '';
   errorMsg = '';
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   onSubmit() {
     if (!this.email || !this.password) {
@@ -23,10 +27,14 @@ export class LoginPageComponent {
       return;
     }
 
-    // protótipo: apenas loga no console
-    console.log('Login com:', this.email, this.password);
+    // Aqui você pode criar validações simples
+    if (this.email.includes('admin')) {
+      this.authService.loginAs('admin', 'Administrador', this.email);
+    } else {
+      this.authService.loginAs('customer', 'Cliente', this.email);
+    }
 
-    // simula sucesso → redireciona para conta
+    // Redireciona para a página de conta
     this.router.navigate(['/account']);
   }
 }

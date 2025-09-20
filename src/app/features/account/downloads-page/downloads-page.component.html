@@ -1,0 +1,11 @@
+<section class="downloads container">
+  <h1>Meus Downloads</h1>
+  <p *ngIf="!downloads.length">Nenhum e-book disponível ainda.</p>
+
+  <ul class="list" *ngIf="downloads.length">
+    <li *ngFor="let d of downloads">
+      <span class="material-icons">download</span>
+      <a [href]="d.url" target="_blank" download>{{ d.title }}</a>
+    </li>
+  </ul>
+</section>

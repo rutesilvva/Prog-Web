@@ -1,0 +1,26 @@
+<section class="orders container">
+  <h2>Meus Pedidos</h2>
+
+  <table class="orders-table" *ngIf="orders.length > 0; else empty">
+    <thead>
+      <tr>
+        <th># Pedido</th>
+        <th>Data</th>
+        <th>Status</th>
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let o of orders">
+        <td>{{ o.id }}</td>
+        <td>{{ o.date }}</td>
+        <td>{{ o.status }}</td>
+        <td>{{ o.total | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #empty>
+    <p>Você ainda não possui pedidos realizados.</p>
+  </ng-template>
+</section>

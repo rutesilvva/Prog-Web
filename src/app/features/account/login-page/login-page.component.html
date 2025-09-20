@@ -1,9 +1,11 @@
 <section class="login">
   <div class="container">
     <h1>Entrar</h1>
-    <p>Acesse sua conta para continuar.</p>
+    <p class="subtitle">Acesse sua conta para continuar.</p>
 
+    <!-- Formulário de Login -->
     <form class="login-form" (ngSubmit)="onSubmit()">
+      <!-- Campo E-mail -->
       <div class="form-group">
         <label for="email">E-mail</label>
         <input
@@ -16,6 +18,7 @@
         />
       </div>
 
+      <!-- Campo Senha -->
       <div class="form-group">
         <label for="password">Senha</label>
         <input
@@ -28,11 +31,16 @@
         />
       </div>
 
-      <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+      <!-- Mensagem de Erro -->
+      <div *ngIf="errorMsg" class="error">
+        {{ errorMsg }}
+      </div>
 
-      <button type="submit" class="btn">Entrar</button>
+      <!-- Botão de Ação -->
+      <button type="submit" class="btn btn-primary">Entrar</button>
     </form>
 
+    <!-- Links extras -->
     <div class="extra">
       <a routerLink="/account">Esqueceu sua senha?</a>
       <a routerLink="/account">Criar conta</a>
