@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
+import { User } from '../../core/services/auth.service';
+import { AuthService } from '../../core/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +15,7 @@ import { CartService } from '../../../core/services/cart.service';
 export class HeaderComponent implements OnInit {
   catOpen = false;
   totalQty = 0;
+  user: User | null = null;
 
   categories = [
     { label: 'IA e Machine Learning', code: 'ia-ml' },
@@ -24,15 +27,27 @@ export class HeaderComponent implements OnInit {
     { label: 'Banco de Dados', code: 'db' }
   ];
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit() {
     this.cartService.cartItems.subscribe(items => {
       this.totalQty = items.reduce((sum, i) => sum + i.quantity, 0);
     });
+
+    // escuta o usuário logado
+    this.authService.user$.subscribe(u => {
+      this.user = u;
+    });
   }
 
   closeCats() {
     this.catOpen = false;
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
