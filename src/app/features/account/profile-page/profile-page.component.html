@@ -1,15 +1,22 @@
 <section class="profile container">
   <h1>Minha Conta</h1>
 
-  <div class="profile-info card">
+  <div class="profile-info card" *ngIf="user; else notLogged">
     <h2>Dados Pessoais</h2>
     <p><strong>Nome:</strong> {{ user.name }}</p>
     <p><strong>E-mail:</strong> {{ user.email }}</p>
-    <p><strong>Telefone:</strong> {{ user.phone }}</p>
+    <p><strong>Perfil:</strong> {{ user.role }}</p>
     <a class="btn" routerLink="/account/edit">Editar Perfil</a>
   </div>
 
-  <div class="orders card">
+  <ng-template #notLogged>
+    <div class="alert">
+      Você não está logado.  
+      <a routerLink="/login">Clique aqui para entrar</a>.
+    </div>
+  </ng-template>
+
+  <div class="orders card" *ngIf="user">
     <h2>Meus Pedidos</h2>
     <table>
       <thead>

@@ -12,6 +12,7 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
+  name = '';       // novo campo
   email = '';
   password = '';
   errorMsg = '';
@@ -22,19 +23,18 @@ export class LoginPageComponent {
   ) {}
 
   onSubmit() {
-    if (!this.email || !this.password) {
+    if (!this.name || !this.email || !this.password) {
       this.errorMsg = 'Preencha todos os campos!';
       return;
     }
 
-    // Aqui você pode criar validações simples
+    // Armazena nome e email no AuthService
     if (this.email.includes('admin')) {
-      this.authService.loginAs('admin', 'Administrador', this.email);
+      this.authService.loginAs('admin', this.name, this.email);
     } else {
-      this.authService.loginAs('customer', 'Cliente', this.email);
+      this.authService.loginAs('customer', this.name, this.email);
     }
 
-    // Redireciona para a página de conta
     this.router.navigate(['/account']);
   }
 }
