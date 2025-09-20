@@ -3,52 +3,67 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 
-  { path: 'home',
+  {
+    path: 'home',
     loadComponent: () =>
       import('./features/home/home.component').then(m => m.HomeComponent),
     title: 'Home'
   },
 
-  { path: 'catalog',
+  {
+    path: 'catalog',
     loadComponent: () =>
       import('./features/catalog/catalog-page/catalog-page.component')
         .then(m => m.CatalogPageComponent),
     title: 'Catálogo'
   },
 
-  { path: 'product/:slug',
+  {
+    path: 'product/:slug',
     loadComponent: () =>
       import('./features/catalog/product-detail-page/product-detail-page.component')
         .then(m => m.ProductDetailPageComponent),
     title: 'Produto'
   },
 
-  { path: 'cart',
+  {
+    path: 'cart',
     loadComponent: () =>
       import('./features/cart/cart-page/cart-page.component')
         .then(m => m.CartPageComponent),
     title: 'Carrinho'
   },
 
-  { path: 'checkout',
+  {
+    path: 'checkout',
     loadComponent: () =>
       import('./features/checkout/checkout-page/checkout-page.component')
         .then(m => m.CheckoutPageComponent),
     title: 'Checkout'
   },
 
-  { path: 'account',
+  {
+    path: 'account',
     loadComponent: () =>
       import('./features/account/profile-page/profile-page.component')
         .then(m => m.ProfilePageComponent),
     title: 'Minha Conta'
   },
 
-  { path: 'login',
+  {
+    path: 'login',
     loadComponent: () =>
       import('./features/account/login-page/login-page.component')
         .then(m => m.LoginPageComponent),
     title: 'Entrar'
+  },
+
+  {
+    path: 'about',
+    loadComponent: () =>
+      import('./features/about/about.component')
+        .then(m => m.AboutComponent),
+    title: 'Sobre'
   },
 
   { path: '**', redirectTo: 'home' }

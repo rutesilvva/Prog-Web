@@ -1,1 +1,29 @@
-<p>catalog-page works!</p>
+<section class="catalog">
+  <div class="container">
+
+    <header class="catalog-header">
+      <h1>Catálogo</h1>
+      <div class="filters">
+        <input type="text" placeholder="Buscar produto..." [(ngModel)]="searchTerm" />
+        <select [(ngModel)]="selectedCategory">
+          <option value="">Todas as Categorias</option>
+          <option *ngFor="let c of categories" [value]="c.code">
+            {{ c.label }}
+          </option>
+        </select>
+      </div>
+    </header>
+
+    <div class="catalog-grid">
+      <article class="product-card" *ngFor="let p of filteredProducts">
+        <div class="imgwrap">
+          <img [src]="p.img" [alt]="p.title">
+        </div>
+        <h3>{{ p.title }}</h3>
+        <p class="price">{{ p.price | currency:'BRL':'symbol-narrow' }}</p>
+        <a class="btn" [routerLink]="'/product/' + p.slug">Ver Detalhes</a>
+      </article>
+    </div>
+
+  </div>
+</section>
