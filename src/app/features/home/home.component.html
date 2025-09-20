@@ -5,16 +5,21 @@
       <ng-container *ngFor="let s of slides; let i = index">
         <div class="slide" [class.active]="i === current" [attr.aria-hidden]="i === current ? 'false':'true'">
           <div class="badge-price" *ngIf="s.priceBadge">{{ s.priceBadge }}</div>
+
           <div class="text">
             <p class="eyebrow">{{ s.eyebrow }}</p>
             <h1>{{ s.title }}</h1>
             <p class="desc">{{ s.desc }}</p>
             <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
-            <button class="btn add-cart" (click)="addToCart(s)">
-              <span class="material-icons">add_shopping_cart</span> Adicionar
+            <button class="add-cart-icon" (click)="addToCart(s)" aria-label="Adicionar ao carrinho">
+              <span class="material-icons">add</span>
             </button>
           </div>
-          <img [src]="s.img" [alt]="s.alt" />
+
+          <!-- wrapper para forçar tamanho igual nas imagens do HERO -->
+          <div class="hero-imgwrap">
+            <img [src]="s.img" [alt]="s.alt" />
+          </div>
         </div>
       </ng-container>
 
@@ -30,35 +35,47 @@
       </div>
     </article>
 
-    <!-- Cards laterais -->
-    <div class="hero-side">
-      <article class="side card">
-        <div class="ribbon">-25%</div>
-        <h3>Promoção de Verão</h3>
-        <p>Linux + Shell + Redes</p>
-        <a class="link" routerLink="/catalog" [queryParams]="{cat:'netsec'}">VER OFERTA</a>
-        <button class="btn add-cart" (click)="addToCart({
-          slug:'redes-linux', title:'Redes Linux Avançadas', price:89, img:'/assets/prod/linux-network.png'
-        })">
-          <span class="material-icons">add_shopping_cart</span> Adicionar
-        </button>
-        <img src="/assets/hero/linux-network.png" alt="Linux e Redes" />
-      </article>
+   <!-- Cards laterais (também envolvi a imagem para consistência) -->
+<div class="hero-side">
+  <article class="side card">
+    <div class="ribbon">-25%</div>
+    <h3>Promoção de Verão</h3>
+    <p>Linux + Shell + Redes</p>
 
-      <article class="side card">
-        <h3>Lançamento</h3>
-        <p>“Arquitetura de Software Moderna”</p>
-        <a class="link" routerLink="/product/arquitetura-software-moderna">SAIBA MAIS</a>
-        <button class="btn add-cart" (click)="addToCart({
-          slug:'arquitetura-moderna', title:'Arquitetura de Software Moderna', price:99, img:'/assets/prod/arch-modern.png'
-        })">
-          <span class="material-icons">add_shopping_cart</span> Adicionar
-        </button>
-        <img src="/assets/hero/arch-modern.png" alt="Arquitetura de Software" />
-      </article>
+    <button class="add-cart-icon" (click)="addToCart({
+      slug:'redes-linux', title:'Redes Linux Avançadas', price:89, img:'https://imagens.disal.com.br/produtos/ampliada/1191128.jpg'
+    })" aria-label="Adicionar ao carrinho">
+      <span class="material-icons">add</span>
+    </button>
+
+    <div class="side-imgwrap">
+      <a routerLink="/catalog" [queryParams]="{cat:'netsec'}">
+        <img src="https://imagens.disal.com.br/produtos/ampliada/1191128.jpg" alt="Linux e Redes" />
+      </a>
     </div>
-  </div>
+  </article>
+
+  <article class="side card">
+    <h3>Lançamento</h3>
+    <p>“Arquitetura de Software Moderna”</p>
+
+    <button class="add-cart-icon" (click)="addToCart({
+      slug:'arquitetura-moderna', title:'Arquitetura de Software Moderna', price:99, img:'https://m.media-amazon.com/images/I/81ZE1M+bueL._UF1000,1000_QL80_.jpg'
+    })" aria-label="Adicionar ao carrinho">
+      <span class="material-icons">add</span>
+    </button>
+
+    <div class="side-imgwrap">
+      <a routerLink="/product/arquitetura-software-moderna">
+        <img src="https://m.media-amazon.com/images/I/81ZE1M+bueL._UF1000,1000_QL80_.jpg" alt="Arquitetura de Software" />
+      </a>
+    </div>
+  </article>
+</div>
+</div>
 </section>
+
+
 
 <!-- Carrossel de Produtos -->
 <section class="products-carousel">
@@ -85,8 +102,8 @@
             <h3>{{ p.title }}</h3>
             <p class="price">{{ p.price | currency:'BRL':'symbol-narrow':'1.2-2' }}</p>
           </a>
-          <button class="btn add-cart" (click)="addToCart(p)">
-            <span class="material-icons">add_shopping_cart</span> Adicionar
+          <button class="add-cart-icon" (click)="addToCart(p)" aria-label="Adicionar ao carrinho">
+            <span class="material-icons">add</span>
           </button>
         </div>
       </div>
