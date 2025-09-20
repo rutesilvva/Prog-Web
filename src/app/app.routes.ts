@@ -67,13 +67,40 @@ export const routes: Routes = [
   },
 
   {
-  path: 'contact',
-  loadComponent: () =>
-    import('./features/contact/contact-page/contact-page.component')
-      .then(m => m.ContactPageComponent),
-  title: 'Contato'
-}
-,
+    path: 'contact',
+    loadComponent: () =>
+      import('./features/contact/contact-page/contact-page.component')
+        .then(m => m.ContactPageComponent),
+    title: 'Contato'
+  },
+
+  {
+    path: 'pages/terms',
+    loadComponent: () =>
+      import('./features/pages/terms/terms.component').then(m => m.TermsComponent),
+    title: 'Termos de Uso'
+  },
+
+  {
+    path: 'pages/returns',
+    loadComponent: () =>
+      import('./features/pages/returns/returns.component').then(m => m.ReturnsComponent),
+    title: 'Política de Trocas'
+  },
+
+  {
+    path: 'pages/shipping',
+    loadComponent: () =>
+      import('./features/pages/shipping/shipping.component').then(m => m.ShippingComponent),
+    title: 'Política de Envio'
+  },
+
+  {
+    path: 'pages/privacy',
+    loadComponent: () =>
+      import('./features/pages/privacy/privacy.component').then(m => m.PrivacyComponent),
+    title: 'Política de Privacidade'
+  },
 
   { path: '**', redirectTo: 'home' }
 ];
