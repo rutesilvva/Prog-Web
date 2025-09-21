@@ -53,7 +53,6 @@
   }
 }
 
-/* Dropdown categorias */
 .dropdown {
   position: relative;
 
@@ -96,7 +95,6 @@
     }
   }
 
-  /* Quando o dropdown está aberto */
   .panel.open {
     opacity: 1;
     transform: translateY(0);
@@ -104,7 +102,6 @@
   }
 }
 
-/* Carrinho */
 .cart-btn {
   margin-left: auto;
 

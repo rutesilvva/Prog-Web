@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ShippingCalcComponent } from '../shipping-calc/shipping-calc.component';
 import { CartService, CartItem } from '../../../../core/services/cart.service';
+import { OrdersService } from '../../../core/services/orders.service';
 
 @Component({
   selector: 'app-checkout-page',
@@ -18,6 +19,7 @@ export class CheckoutPageComponent {
 
   constructor(
     private cartService: CartService,
+    private ordersService: OrdersService,  // ⬅️ injete aqui
     private router: Router
   ) {
     this.cartService.cartItems.subscribe(items => {
@@ -38,8 +40,11 @@ export class CheckoutPageComponent {
   }
 
   confirmOrder() {
-    this.orderConfirmed = true;
+    // cria pedido vinculado ao usuário logado
+    this.ordersService.createOrder(this.cartItems, this.total);
+
     this.cartService.clearCart();
+    this.orderConfirmed = true;
 
     setTimeout(() => {
       this.orderConfirmed = false;

@@ -9,16 +9,20 @@ export interface User {
 }
 
 const LS_KEY = 'auth_user';
-
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private _user$ = new BehaviorSubject<User | null>(this.load());
   user$ = this._user$.asObservable();
 
   private load(): User | null {
-    try { return JSON.parse(localStorage.getItem(LS_KEY) || 'null'); }
-    catch { return null; }
+    try {
+      const raw = localStorage.getItem(LS_KEY);
+      return raw ? JSON.parse(raw) : null;
+    } catch {
+      return null;
+    }
   }
+
   private persist(u: User | null) {
     if (u) localStorage.setItem(LS_KEY, JSON.stringify(u));
     else localStorage.removeItem(LS_KEY);
@@ -35,7 +39,10 @@ export class AuthService {
     this.persist(null);
   }
 
-  get user() { return this._user$.value; }
+  get user(): User | null {
+    return this._user$.value || this.load(); // garante que busca do localStorage
+  }
+
   isAdmin()  { return this.user?.role === 'admin'; }
   isLogged() { return !!this.user; }
 }

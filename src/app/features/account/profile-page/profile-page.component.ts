@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService, User } from '../../../core/services/auth.service';
+
+import { OrdersService, Order } from '../../../core/services/orders.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -10,17 +13,28 @@ import { AuthService, User } from '../../../core/services/auth.service';
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.scss']
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent implements OnInit, OnDestroy {
   user: User | null = null;
+  orders: Order[] = [];
+  private sub?: Subscription;
 
-  orders = [
-    { id: '1234', date: '12/09/2025', total: 199.90, status: 'Entregue' },
-    { id: '5678', date: '01/09/2025', total: 89.90, status: 'Em andamento' }
-  ];
-
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private ordersService: OrdersService
+  ) {}
 
   ngOnInit(): void {
-    this.user = this.authService.user; // pega o usuário atual logado
+    this.sub = this.authService.user$.subscribe(u => {
+      this.user = u;
+      if (u) {
+        this.ordersService.orders$.subscribe(all => {
+          this.orders = all.filter(o => o.customer?.email === u.email);
+        });
+      }
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 }

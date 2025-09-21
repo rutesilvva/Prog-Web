@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
-import { User } from '../../core/services/auth.service';
-import { AuthService } from '../../core/services/auth.service';
 
+import { AuthService,User } from '../../core/services/auth.service';
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -29,7 +28,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -37,7 +37,6 @@ export class HeaderComponent implements OnInit {
       this.totalQty = items.reduce((sum, i) => sum + i.quantity, 0);
     });
 
-    // escuta o usuário logado
     this.authService.user$.subscribe(u => {
       this.user = u;
     });
@@ -49,5 +48,6 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/home']);
   }
 }
