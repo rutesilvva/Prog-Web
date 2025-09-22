@@ -45,8 +45,10 @@
       input {
         padding: 10px;
         border: 1px solid var(--gray-200);
-        border-radius: 6px;
+        border-radius: 18px;
+        border: 1px solid;
         font-size: 14px;
+
 
         &:focus {
           border-color: var(--blue-600);
@@ -57,13 +59,14 @@
 
     .btn {
       background: var(--orange);
-      color: #fff;
-      border: none;
+      color: black;
+      border: 1px solid;
       padding: 12px;
-      border-radius: 8px;
+      border-radius: 18px;
       font-weight: 700;
       cursor: pointer;
       margin-top: 8px;
+      transition: background 0.3s ease, border 0.3s ease;
 
       &:hover {
         background: #e86b00;
