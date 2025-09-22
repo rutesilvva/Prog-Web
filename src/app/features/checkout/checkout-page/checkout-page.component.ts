@@ -1,54 +1,50 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { ShippingCalcComponent } from '../shipping-calc/shipping-calc.component';
+import { PaymentWidgetComponent } from '../payment-widget/payment-widget.component';
 import { CartService, CartItem } from '../../../../core/services/cart.service';
 import { OrdersService } from '../../../core/services/orders.service';
 
 @Component({
   selector: 'app-checkout-page',
   standalone: true,
-  imports: [CommonModule, ShippingCalcComponent],
+  imports: [CommonModule, ShippingCalcComponent, PaymentWidgetComponent, CurrencyPipe],
   templateUrl: './checkout-page.component.html',
   styleUrls: ['./checkout-page.component.scss']
 })
 export class CheckoutPageComponent {
   cartItems: CartItem[] = [];
-  orderConfirmed = false;
   shippingCost = 0;
+  paymentMethod: 'pix' | 'card' | 'boleto' = 'pix';
+  orderConfirmed = false;
 
   constructor(
-    private cartService: CartService,
-    private ordersService: OrdersService,  // ⬅️ injete aqui
+    private cart: CartService,
+    private orders: OrdersService,
     private router: Router
   ) {
-    this.cartService.cartItems.subscribe(items => {
-      this.cartItems = items;
-    });
+    this.cart.cartItems.subscribe(items => this.cartItems = items);
   }
 
-  get subtotal() {
-    return this.cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
-  }
+  get subtotal() { return this.cartItems.reduce((s, i) => s + i.price * i.quantity, 0); }
+  get total() { return this.subtotal + this.shippingCost; }
 
-  get total() {
-    return this.subtotal + this.shippingCost;
-  }
-
-  onFreightSelected(price: number) {
-    this.shippingCost = price;
-  }
+  onFreightSelected(price: number) { this.shippingCost = price; }
+  onPaid(method: 'pix'|'card'|'boleto') { this.paymentMethod = method; }
 
   confirmOrder() {
-    // cria pedido vinculado ao usuário logado
-    this.ordersService.createOrder(this.cartItems, this.total);
-
-    this.cartService.clearCart();
+    const id = this.orders.createOrder({
+      items: this.cartItems,
+      paymentMethod: this.paymentMethod,
+      shipping: this.shippingCost
+    });
     this.orderConfirmed = true;
+    this.cart.clearCart();
 
     setTimeout(() => {
       this.orderConfirmed = false;
-      this.router.navigate(['/home']);
-    }, 2000);
+      this.router.navigate(['/account'], { queryParams: { last: id }});
+    }, 1500);
   }
 }

@@ -1,0 +1,15 @@
+<div class="pay">
+  <h3>Pagamento</h3>
+
+  <label class="radio"><input type="radio" [(ngModel)]="method" value="pix"> PIX</label>
+  <label class="radio"><input type="radio" [(ngModel)]="method" value="card"> Cartão de Crédito</label>
+  <label class="radio"><input type="radio" [(ngModel)]="method" value="boleto"> Boleto</label>
+
+  <div *ngIf="method==='card'" class="card-form">
+    <input placeholder="Número do cartão" [(ngModel)]="cardNumber">
+    <input placeholder="Nome impresso" [(ngModel)]="holder">
+    <input placeholder="CVV" [(ngModel)]="cvv">
+  </div>
+
+  <button class="btn" (click)="confirm()">Confirmar pagamento</button>
+</div>

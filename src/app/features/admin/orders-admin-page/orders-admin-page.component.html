@@ -1,0 +1,24 @@
+<section class="container">
+  <h1>Pedidos (Admin)</h1>
+
+  <table *ngIf="orders.length">
+    <thead>
+      <tr><th>#</th><th>Cliente</th><th>Total</th><th>Status</th><th>Atualizar</th></tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let o of orders">
+        <td>{{ o.id }}</td>
+        <td>{{ o.customer.name }}<br><small>{{ o.customer.email }}</small></td>
+        <td>{{ o.total | currency:'BRL':'symbol-narrow' }}</td>
+        <td>{{ o.status }}</td>
+        <td>
+          <select [(ngModel)]="o.status" (change)="changeStatus(o, o.status)">
+            <option *ngFor="let s of statuses" [ngValue]="s">{{ s }}</option>
+          </select>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!orders.length">Nenhum pedido ainda.</p>
+</section>

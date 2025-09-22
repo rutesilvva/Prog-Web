@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink, Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService, User } from '../../core/services/auth.service';
 import { CartService } from '../../../core/services/cart.service';
 
-import { AuthService,User } from '../../core/services/auth.service';
+
 @Component({
   selector: 'app-header',
   standalone: true,
@@ -11,10 +13,11 @@ import { AuthService,User } from '../../core/services/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, OnDestroy {
   catOpen = false;
-  totalQty = 0;
   user: User | null = null;
+  sub?: Subscription;
+  totalQty = 0;
 
   categories = [
     { label: 'IA e Machine Learning', code: 'ia-ml' },
@@ -27,19 +30,20 @@ export class HeaderComponent implements OnInit {
   ];
 
   constructor(
-    private cartService: CartService,
-    private authService: AuthService,
+    private auth: AuthService,
+    private cart: CartService,
     private router: Router
   ) {}
 
-  ngOnInit() {
-    this.cartService.cartItems.subscribe(items => {
+  ngOnInit(): void {
+    this.sub = this.auth.user$.subscribe(u => this.user = u);
+    this.cart.cartItems.subscribe(items => {
       this.totalQty = items.reduce((sum, i) => sum + i.quantity, 0);
     });
+  }
 
-    this.authService.user$.subscribe(u => {
-      this.user = u;
-    });
+  ngOnDestroy(): void {
+    this.sub?.unsubscribe();
   }
 
   closeCats() {
@@ -47,7 +51,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.authService.logout();
+    this.auth.logout();
     this.router.navigate(['/home']);
   }
 }

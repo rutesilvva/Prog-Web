@@ -3,6 +3,7 @@
   <p class="subtitle">Revise seus dados e confirme o pedido</p>
 
   <div class="checkout-grid">
+    <!-- FORMULÁRIO -->
     <form class="checkout-form">
       <h2>Dados do Cliente</h2>
 
@@ -39,13 +40,16 @@
       </div>
     </form>
 
+    <!-- RESUMO DO PEDIDO -->
     <aside class="checkout-summary">
       <h2>Resumo do Pedido</h2>
 
+      <!-- ALERTA DE SUCESSO -->
       <div class="alert success" *ngIf="orderConfirmed">
         ✅ Pedido confirmado com sucesso! Obrigado por comprar conosco.
       </div>
 
+      <!-- ITENS DO CARRINHO -->
       <div class="summary-item" *ngFor="let item of cartItems">
         <span>{{ item.title }} (x{{ item.quantity }})</span>
         <span>
@@ -53,8 +57,13 @@
         </span>
       </div>
 
+      <!-- FRETE -->
       <app-shipping-calc (freightSelected)="onFreightSelected($event)"></app-shipping-calc>
 
+      <!-- PAGAMENTO -->
+      <app-payment-widget (paid)="onPaid($event)"></app-payment-widget>
+
+      <!-- TOTAIS -->
       <div class="summary-item">
         <span>Subtotal</span>
         <span>{{ subtotal | currency:'BRL':'symbol-narrow':'1.2-2' }}</span>
@@ -70,6 +79,7 @@
         <strong>{{ total | currency:'BRL':'symbol-narrow':'1.2-2' }}</strong>
       </div>
 
+      <!-- BOTÃO CONFIRMAR -->
       <button class="btn-confirm" (click)="confirmOrder()">Confirmar Pedido</button>
     </aside>
   </div>

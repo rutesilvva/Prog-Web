@@ -12,29 +12,20 @@ import { AuthService } from '../../../core/services/auth.service';
   styleUrls: ['./login-page.component.scss']
 })
 export class LoginPageComponent {
-  name = '';       // novo campo
+  name = '';
   email = '';
   password = '';
   errorMsg = '';
 
-  constructor(
-    private router: Router,
-    private authService: AuthService
-  ) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   onSubmit() {
     if (!this.name || !this.email || !this.password) {
       this.errorMsg = 'Preencha todos os campos!';
       return;
     }
-
-    // Armazena nome e email no AuthService
-    if (this.email.includes('admin')) {
-      this.authService.loginAs('admin', this.name, this.email);
-    } else {
-      this.authService.loginAs('customer', this.name, this.email);
-    }
-
+    const role = this.email.includes('admin') ? 'admin' : 'customer';
+    this.authService.loginAs(role, this.name, this.email);
     this.router.navigate(['/account']);
   }
 }

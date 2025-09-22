@@ -2,6 +2,7 @@
   <div class="container">
     <a class="logo" routerLink="/home">Editora</a>
 
+    <!-- Categorias -->
     <div class="dropdown"
          (mouseenter)="catOpen=true" (mouseleave)="catOpen=false"
          (focusin)="catOpen=true" (focusout)="catOpen=false">
@@ -24,12 +25,14 @@
       </div>
     </div>
 
+    <!-- Links principais -->
     <ul class="mainlinks">
       <li><a routerLink="/catalog">Catálogo</a></li>
       <li><a routerLink="/about">Sobre</a></li>
       <li><a routerLink="/contact">Contato</a></li>
     </ul>
 
+    <!-- Carrinho -->
     <div class="cart-btn">
       <a routerLink="/cart" aria-label="Carrinho">
         <span class="material-icons">shopping_cart</span>
@@ -37,10 +40,12 @@
       </a>
     </div>
 
+    <!-- Autenticação -->
     <div class="auth-btn">
       <ng-container *ngIf="!user; else loggedIn">
         <a routerLink="/login">Entrar</a>
       </ng-container>
+
       <ng-template #loggedIn>
         <span>Olá, {{ user?.name }}</span>
         <button class="btn-logout" (click)="logout()">Sair</button>

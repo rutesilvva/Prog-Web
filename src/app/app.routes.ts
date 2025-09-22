@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { adminGuard } from './core/services/guards/admin.guards';
+import { authGuard } from './core/services/guards/auth.guard';
+import { AuthService } from './core/services/auth.service';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -82,6 +84,29 @@ export const routes: Routes = [
     loadComponent: () => import('./features/pages/privacy/privacy.component').then(m => m.PrivacyComponent),
     title: 'Política de Privacidade'
   },
+
+   { path: 'checkout',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/checkout/checkout-page/checkout-page.component')
+      .then(m => m.CheckoutPageComponent),
+    title: 'Checkout'
+  },
+
+  { path: 'account',
+    canActivate: [authGuard],
+    loadComponent: () => import('./features/account/profile-page/profile-page.component')
+      .then(m => m.ProfilePageComponent),
+    title: 'Minha Conta'
+  },
+
+  // Painel admin
+  { path: 'admin',
+    canActivate: [adminGuard],
+    loadComponent: () => import('./features/admin/admin-orders-page/admin-orders-page.component')
+      .then(m => m.AdminOrdersPageComponent),
+    title: 'Admin'
+  },
+
 
   { path: '**', redirectTo: 'home' }
 ];

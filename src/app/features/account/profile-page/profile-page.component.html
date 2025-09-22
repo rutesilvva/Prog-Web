@@ -6,33 +6,31 @@
     <p><strong>Nome:</strong> {{ user.name }}</p>
     <p><strong>E-mail:</strong> {{ user.email }}</p>
     <p><strong>Perfil:</strong> {{ user.role }}</p>
-    <a class="btn" routerLink="/account/edit">Editar Perfil</a>
   </div>
 
   <div class="orders card">
     <h2>Meus Pedidos</h2>
 
-    <table *ngIf="orders.length > 0; else noOrders">
+    <p *ngIf="!orders.length">Você ainda não realizou nenhum pedido.</p>
+
+    <table *ngIf="orders.length">
       <thead>
-        <tr>
-          <th>#</th>
-          <th>Data</th>
-          <th>Total</th>
-          <th>Status</th>
-        </tr>
+      <tr><th>#</th><th>Data</th><th>Total</th><th>Status</th><th>Downloads</th></tr>
       </thead>
       <tbody>
         <tr *ngFor="let o of orders">
           <td>{{ o.id }}</td>
-          <td>{{ o.date | date:'shortDate' }}</td>
+          <td>{{ o.date | date:'short' }}</td>
           <td>{{ o.total | currency:'BRL':'symbol-narrow' }}</td>
           <td>{{ o.status }}</td>
+          <td>
+            <ng-container *ngIf="o.downloads?.length; else none">
+              <a *ngFor="let d of o.downloads" [href]="d.url" target="_blank">{{ d.title }}</a>
+            </ng-container>
+            <ng-template #none>–</ng-template>
+          </td>
         </tr>
       </tbody>
     </table>
-
-    <ng-template #noOrders>
-      <p>Você ainda não realizou nenhum pedido.</p>
-    </ng-template>
   </div>
 </section>

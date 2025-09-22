@@ -4,17 +4,10 @@
     <p>Acesse sua conta para continuar.</p>
 
     <form class="login-form" (ngSubmit)="onSubmit()">
-      <div class="form-group">
-        <label for="name">Nome</label>
-        <input
-          id="name"
-          type="text"
-          [(ngModel)]="name"
-          name="name"
-          placeholder="Digite seu nome"
-          required
-        />
-      </div>
+  <div class="form-group">
+    <label for="name">Nome</label>
+    <input id="name" type="text" [(ngModel)]="name" name="name" required />
+  </div>
 
       <div class="form-group">
         <label for="email">E-mail</label>
