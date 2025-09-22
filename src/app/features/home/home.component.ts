@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       priceBadge: 'R$ 99',
       ctaText: 'VER BOX',
       ctaLink: '/catalog',
-      img: '/assets/hero/ai-hero.png',
+      img: 'https://m.media-amazon.com/images/I/814TXmfTKLL._UF1000,1000_QL80_.jpg',
       alt: 'Livros de IA e Machine Learning'
     },
     {
@@ -51,16 +51,17 @@ export class HomeComponent implements OnInit, OnDestroy {
       desc: 'Arquitetura, padrões e testes end-to-end para projetos escaláveis.',
       ctaText: 'PROGRAMAR AGORA',
       ctaLink: '/catalog',
-      img: '/assets/hero/angular-ts.png',
-      alt: 'Livros de TypeScript e Angular'
+      img: 'https://m.media-amazon.com/images/I/71aMLMZWutL._UF894,1000_QL80_.jpg',
+      alt: 'Livro de TypeScript e Angular'
     },
     {
       eyebrow: 'Infra e nuvem',
       title: 'DevOps & Kubernetes',
       desc: 'CI/CD, observabilidade e boas práticas de containers em cloud.',
+      priceBadge: 'R$ 120',
       ctaText: 'EXPLORAR TÍTULOS',
       ctaLink: '/catalog',
-      img: '/assets/hero/devops-k8s.png',
+      img: 'https://m.media-amazon.com/images/I/812I44qv8DL._UF1000,1000_QL80_.jpg',
       alt: 'Livros de DevOps e Kubernetes'
     }
   ];
@@ -79,11 +80,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   ];
 
   products: Product[] = [
-    { title: 'Kubernetes para desenvolvedores', slug: 'kubernetes-dev', price: 120, img: '/assets/prod/kubernetes.png' },
-    { title: 'Redes Linux Avançadas', slug: 'redes-linux', price: 89, img: '/assets/prod/linux-network.png' },
-    { title: 'Arquitetura de Software Moderna', slug: 'arquitetura-moderna', price: 99, img: '/assets/prod/arch-modern.png' },
-    { title: 'Aprendizado de Máquina Essencial', slug: 'ml-essencial', price: 79, img: '/assets/prod/ml.png' },
-    { title: 'TypeScript Completo', slug: 'typescript', price: 110, img: '/assets/prod/typescript.png' }
+    { title: 'Kubernetes para desenvolvedores', slug: 'kubernetes-dev', price: 120, img: 'https://m.media-amazon.com/images/I/61EAJDHqiDL._UF894,1000_QL80_.jpg' },
+    { title: 'Redes Linux Avançadas', slug: 'redes-linux', price: 89, img: 'https://imagens.disal.com.br/produtos/ampliada/1191128.jpg' },
+    { title: 'Arquitetura de Software Moderna', slug: 'arquitetura-moderna', price: 99, img: 'https://m.media-amazon.com/images/I/81ZE1M+bueL._UF1000,1000_QL80_.jpg' },
+    { title: 'Aprendizado de Máquina Essencial', slug: 'ml-essencial', price: 79, img: 'https://m.media-amazon.com/images/I/616DP2PnANL._UF1000,1000_QL80_.jpg' },
+    { title: 'TypeScript Completo', slug: 'typescript', price: 110, img: 'https://www.casadocodigo.com.br/cdn/shop/products/p_801e56cc-890d-4709-8dee-76288fc53c49_large.jpg?v=1627678101' }
   ];
   prodIndex = 0;
 

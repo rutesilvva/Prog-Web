@@ -33,7 +33,7 @@ export class CatalogPageComponent {
   ];
 
   products: Product[] = [
-    { title: 'Kubernetes para desenvolvedores', slug: 'kubernetes-dev', price: 120, img: '/assets/prod/kubernetes.png', category: 'devops' },
+    { title: 'Kubernetes para desenvolvedores', slug: 'kubernetes-dev', price: 120, img: 'https://m.media-amazon.com/images/I/61EAJDHqiDL._UF894,1000_QL80_.jpg', category: 'devops' },
     { title: 'Redes Linux Avançadas', slug: 'redes-linux', price: 89, img: '/assets/prod/linux-network.png', category: 'netsec' },
     { title: 'Arquitetura de Software Moderna', slug: 'arquitetura-moderna', price: 99, img: '/assets/prod/arch-modern.png', category: 'arch' },
     { title: 'Aprendizado de Máquina Essencial', slug: 'ml-essencial', price: 79, img: '/assets/prod/ml.png', category: 'ia-ml' },
