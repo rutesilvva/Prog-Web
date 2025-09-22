@@ -46,15 +46,17 @@
 
   .btn {
     background: var(--orange);
-    color: #fff;
+    color: #e66c00;
     border: 0;
     padding: 12px 18px;
     border-radius: 8px;
+    border: 1px solid;
     cursor: pointer;
     font-weight: 700;
 
     &:hover {
-      background: #e66c00;
+      background: #ff7700;
+      color: white;
     }
   }
 }
