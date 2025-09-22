@@ -22,7 +22,7 @@ export class ProductDetailPageComponent {
     title: 'Livro Angular Avançado',
     price: 129,
     description: 'Um guia completo sobre Angular moderno com práticas de mercado, arquitetura e testes.',
-    img: '/assets/prod/angular.png'
+    img: 'https://www.casadocodigo.com.br/cdn/shop/products/p_801e56cc-890d-4709-8dee-76288fc53c49_large.jpg?v=1627678101'
   };
 
   qty = 1;
