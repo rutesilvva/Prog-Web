@@ -10,7 +10,12 @@
   </thead>
   <tbody>
     <tr *ngFor="let item of items">
-      <td>{{ item.title }}</td>
+      <td>
+        <div class="product-info">
+          <img [src]="item.img" alt="{{ item.title }}" class="thumb" />
+          <span>{{ item.title }}</span>
+        </div>
+      </td>
       <td>{{ item.price | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
       <td>
         <input type="number" [value]="item.quantity" min="1"
@@ -18,7 +23,7 @@
       </td>
       <td>{{ item.price * item.quantity | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
       <td>
-        <button class="btn remove" (click)="removeItem(item.slug)">Remover</button>
+        <button class="btn-remove" (click)="removeItem(item.slug)">✕</button>
       </td>
     </tr>
   </tbody>
@@ -30,7 +35,8 @@
 
 <div class="cart-footer" *ngIf="items.length > 0">
   <h3>Total: {{ total | currency:'BRL':'symbol-narrow':'1.2-2' }}</h3>
-  <button class="btn danger" (click)="clearCart()">Esvaziar Carrinho</button>
-  <button class="btn-confirm" (click)="goToCheckout()">Finalizar Compra</button>
-
+  <div class="footer-actions">
+    <button class="btn danger" (click)="clearCart()">🗑 Esvaziar</button>
+    <button class="btn btn-confirm" (click)="goToCheckout()">✅ Finalizar Compra</button>
+  </div>
 </div>
