@@ -29,14 +29,20 @@
   </tbody>
 </table>
 
-<div *ngIf="items.length === 0" class="empty">
-  Carrinho vazio.
+<div class="cart-footer">
+  <ng-container *ngIf="items.length > 0; else emptyFooter">
+    <h3>Total: {{ total | currency:'BRL':'symbol-narrow':'1.2-2' }}</h3>
+    <div class="footer-actions">
+      <button class="btn danger" (click)="clearCart()">🗑 Esvaziar</button>
+      <button class="btn btn-confirm" (click)="goToCheckout()">✅ Finalizar Compra</button>
+    </div>
+  </ng-container>
+
+  <ng-template #emptyFooter>
+    <h3>Seu carrinho está vazio.</h3>
+    <div class="footer-actions">
+      <button class="btn btn-confirm" routerLink="/catalog">🛒 Ir às compras</button>
+    </div>
+  </ng-template>
 </div>
 
-<div class="cart-footer" *ngIf="items.length > 0">
-  <h3>Total: {{ total | currency:'BRL':'symbol-narrow':'1.2-2' }}</h3>
-  <div class="footer-actions">
-    <button class="btn danger" (click)="clearCart()">🗑 Esvaziar</button>
-    <button class="btn btn-confirm" (click)="goToCheckout()">✅ Finalizar Compra</button>
-  </div>
-</div>
