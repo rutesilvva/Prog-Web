@@ -10,16 +10,18 @@ export interface Product {
   category?: string;
   digital?: boolean;    // e-book?
   downloadUrl?: string; // se for digital
+  description?: string;
+
 }
 
 const LS_KEY = 'products';
 
 const seed: Product[] = [
-  { id:'1', slug:'kubernetes-dev',   title:'Kubernetes para desenvolvedores', price:120, img:'/assets/prod/kubernetes.png' },
-  { id:'2', slug:'redes-linux',      title:'Redes Linux Avançadas',           price: 89, img:'/assets/prod/linux-network.png' },
-  { id:'3', slug:'arquitetura-moderna', title:'Arquitetura de Software Moderna', price: 99, img:'/assets/prod/arch-modern.png', digital:true, downloadUrl:'#' },
-  { id:'4', slug:'ml-essencial',     title:'Aprendizado de Máquina Essencial', price: 79, img:'/assets/prod/ml.png', digital:true, downloadUrl:'#' },
-  { id:'5', slug:'typescript',       title:'TypeScript Completo',              price:110, img:'/assets/prod/typescript.png' },
+  { id:'1', slug:'kubernetes-dev', title:'Kubernetes para desenvolvedores', price:120, img:'/assets/prod/kubernetes.png', description:'Aprenda Kubernetes do zero até nível avançado.' },
+  { id:'2', slug:'redes-linux', title:'Redes Linux Avançadas', price: 89, img:'/assets/prod/linux-network.png', description:'Guia prático de redes em Linux.' },
+  { id:'3', slug:'arquitetura-moderna', title:'Arquitetura de Software Moderna', price: 99, img:'/assets/prod/arch-modern.png', digital:true, downloadUrl:'#', description:'Arquitetura limpa e escalável para projetos modernos.' },
+  { id:'4', slug:'ml-essencial', title:'Aprendizado de Máquina Essencial', price: 79, img:'/assets/prod/ml.png', digital:true, downloadUrl:'#', description:'Conceitos fundamentais e aplicações de Machine Learning.' },
+  { id:'5', slug:'typescript', title:'TypeScript Completo', price:110, img:'/assets/prod/typescript.png', description:'Tudo sobre TypeScript, do básico ao avançado.' },
 ];
 
 @Injectable({ providedIn: 'root' })

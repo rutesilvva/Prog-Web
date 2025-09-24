@@ -11,21 +11,39 @@
   <div class="orders card">
     <h2>Meus Pedidos</h2>
 
-    <p *ngIf="!orders.length">Você ainda não realizou nenhum pedido.</p>
+    <div *ngIf="orders.length === 0" class="no-orders">
+      Você ainda não tem pedidos.
+    </div>
 
-    <table *ngIf="orders.length">
+    <table *ngIf="orders.length > 0">
       <thead>
-      <tr><th>#</th><th>Data</th><th>Total</th><th>Status</th><th>Downloads</th></tr>
+        <tr>
+          <th>#</th>
+          <th>Data</th>
+          <th>Subtotal</th>
+          <th>Frete</th>
+          <th>Total</th>
+          <th>Status</th>
+          <th>Downloads</th>
+        </tr>
       </thead>
       <tbody>
         <tr *ngFor="let o of orders">
           <td>{{ o.id }}</td>
           <td>{{ o.date | date:'short' }}</td>
+          <td>{{ o.subtotal | currency:'BRL':'symbol-narrow' }}</td>
+          <td>{{ o.shipping | currency:'BRL':'symbol-narrow' }}</td>
           <td>{{ o.total | currency:'BRL':'symbol-narrow' }}</td>
           <td>{{ o.status }}</td>
           <td>
             <ng-container *ngIf="o.downloads?.length; else none">
-              <a *ngFor="let d of o.downloads" [href]="d.url" target="_blank">{{ d.title }}</a>
+              <div class="downloads">
+                <a *ngFor="let d of o.downloads"
+                   [href]="d.url"
+                   target="_blank">
+                  {{ d.title }}
+                </a>
+              </div>
             </ng-container>
             <ng-template #none>–</ng-template>
           </td>

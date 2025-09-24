@@ -20,10 +20,17 @@ export class ProfilePageComponent implements OnInit, OnDestroy {
   constructor(private auth: AuthService, private ordersSrv: OrdersService) {}
 
   ngOnInit(): void {
-    this.sub = this.auth.user$.subscribe(u => {
-      this.user = u;
-      this.orders = u ? this.ordersSrv.getByUser(u.email) : [];
-    });
-  }
+  this.sub = this.auth.user$.subscribe(u => {
+    this.user = u;
+    if (u) {
+      this.ordersSrv.orders$.subscribe(all => {
+        this.orders = all.filter(o => o.customer.email === u.email);
+      });
+    } else {
+      this.orders = [];
+    }
+  });
+}
+
   ngOnDestroy(): void { this.sub?.unsubscribe(); }
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { CartService } from '../../../../core/services/cart.service';
 
 interface Product {
   title: string;
@@ -21,6 +22,8 @@ interface Product {
 export class CatalogPageComponent {
   searchTerm = '';
   selectedCategory = '';
+  constructor(private cart: CartService) {}
+
 
   categories = [
     { label: 'IA e Aprendizado de Máquina', code: 'ia-ml' },
@@ -46,4 +49,9 @@ export class CatalogPageComponent {
       (!this.selectedCategory || p.category === this.selectedCategory)
     );
   }
+
+  addToCart(p: Product) {
+  this.cart.addToCart({ slug: p.slug, title: p.title, price: p.price, img: p.img });
+  alert(`${p.title} foi adicionado ao carrinho!`);
+}
 }

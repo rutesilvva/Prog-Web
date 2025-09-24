@@ -1,6 +1,5 @@
 <section class="catalog">
   <div class="container">
-
     <header class="catalog-header">
       <h1>Catálogo</h1>
       <div class="filters">
@@ -22,8 +21,11 @@
         <h3>{{ p.title }}</h3>
         <p class="price">{{ p.price | currency:'BRL':'symbol-narrow' }}</p>
         <a class="btn" [routerLink]="'/product/' + p.slug">Ver Detalhes</a>
+        <button class="btn add-cart" (click)="addToCart(p)">
+          <span class="material-icons">add_shopping_cart</span> Adicionar
+        </button>
+        
       </article>
     </div>
-
   </div>
 </section>

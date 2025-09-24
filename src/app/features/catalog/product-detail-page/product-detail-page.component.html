@@ -1,4 +1,4 @@
-<section class="product-detail">
+<section class="product-detail" *ngIf="product; else notFound">
   <div class="container grid">
     <div class="image-wrap">
       <img [src]="product.img" [alt]="product.title" />
@@ -6,9 +6,8 @@
 
     <div class="info">
       <h1>{{ product.title }}</h1>
-      <p class="price">{{ product.price | currency:'BRL' }}</p>
-      <p class="desc">{{ product.description }}</p>
-
+      <p class="price">{{ product.price | currency:'BRL':'symbol-narrow' }}</p>
+      
       <div class="actions">
         <input type="number" [(ngModel)]="qty" min="1" />
         <button class="btn" (click)="addToCart()">
@@ -19,3 +18,10 @@
     </div>
   </div>
 </section>
+
+<ng-template #notFound>
+  <div class="container">
+    <h2>Produto não encontrado</h2>
+    <p>Volte ao <a routerLink="/catalog">catálogo</a> para escolher outro item.</p>
+  </div>
+</ng-template>
