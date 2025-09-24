@@ -11,7 +11,7 @@
             <h1>{{ s.title }}</h1>
             <p class="desc">{{ s.desc }}</p>
             <a class="btn" [routerLink]="s.ctaLink">{{ s.ctaText }}</a>
-            <button class="add-cart-icon" (click)="addToCart(s)" aria-label="Adicionar ao carrinho">
+            <button class="add-cart-icon" (click)="addToCart({slug:s.title, title:s.title, price:s.price, img:s.img})">
               <span class="material-icons">add</span>
             </button>
           </div>
@@ -24,60 +24,53 @@
       </ng-container>
 
       <div class="dots" role="tablist" aria-label="Slides">
-        <button
-          *ngFor="let _ of slides; let i = index"
-          class="dot"
-          [class.active]="i === current"
-          (click)="goToHero(i)"
-          [attr.aria-selected]="i === current"
-          [attr.aria-label]="'Ir para o slide ' + (i + 1)">
+        <button *ngFor="let _ of slides; let i = index" class="dot" [class.active]="i === current" (click)="goToHero(i)"
+          [attr.aria-selected]="i === current" [attr.aria-label]="'Ir para o slide ' + (i + 1)">
         </button>
       </div>
     </article>
 
-   <!-- Cards laterais (também envolvi a imagem para consistência) -->
-<div class="hero-side">
-  <article class="side card">
-    <div class="ribbon">-25%</div>
-    <h3>Promoção de Verão</h3>
-    <p>Linux + Shell + Redes</p>
+    <!-- Cards laterais (também envolvi a imagem para consistência) -->
+    <div class="hero-side">
+      <article class="side card">
+        <div class="ribbon">-25%</div>
+        <h3>Promoção de Verão</h3>
+        <p>Linux + Shell + Redes</p>
 
-    <button class="add-cart-icon" (click)="addToCart({
+        <button class="add-cart-icon" (click)="addToCart({
       slug:'redes-linux', title:'Redes Linux Avançadas', price:89, img:'https://imagens.disal.com.br/produtos/ampliada/1191128.jpg'
     })" aria-label="Adicionar ao carrinho">
-      <span class="material-icons">add</span>
-    </button>
+          <span class="material-icons">add</span>
+        </button>
 
-    <div class="side-imgwrap">
-      <a routerLink="/catalog" [queryParams]="{cat:'netsec'}">
-        <img src="https://imagens.disal.com.br/produtos/ampliada/1191128.jpg" alt="Linux e Redes" />
-      </a>
-    </div>
-  </article>
+        <div class="side-imgwrap">
+          <a routerLink="/catalog" [queryParams]="{cat:'netsec'}">
+            <img src="https://imagens.disal.com.br/produtos/ampliada/1191128.jpg" alt="Linux e Redes" />
+          </a>
+        </div>
+      </article>
 
-  <article class="side card">
-    <h3>Lançamento</h3>
-    <p>“Arquitetura de Software Moderna”</p>
+      <article class="side card">
+        <h3>Lançamento</h3>
+        <p>“Arquitetura de Software Moderna”</p>
 
-    <button class="add-cart-icon" (click)="addToCart({
+        <button class="add-cart-icon" (click)="addToCart({
       slug:'arquitetura-moderna', title:'Arquitetura de Software Moderna', price:99, img:'https://m.media-amazon.com/images/I/81ZE1M+bueL._UF1000,1000_QL80_.jpg'
     })" aria-label="Adicionar ao carrinho">
-      <span class="material-icons">add</span>
-    </button>
+          <span class="material-icons">add</span>
+        </button>
 
-    <div class="side-imgwrap">
-      <a routerLink="/product/arquitetura-software-moderna">
-        <img src="https://m.media-amazon.com/images/I/81ZE1M+bueL._UF1000,1000_QL80_.jpg" alt="Arquitetura de Software" />
-      </a>
+        <div class="side-imgwrap">
+          <a routerLink="/product/arquitetura-software-moderna">
+            <img src="https://m.media-amazon.com/images/I/81ZE1M+bueL._UF1000,1000_QL80_.jpg"
+              alt="Arquitetura de Software" />
+          </a>
+        </div>
+      </article>
     </div>
-  </article>
-</div>
-</div>
+  </div>
 </section>
 
-
-
-<!-- Carrossel de Produtos -->
 <section class="products-carousel">
   <div class="container">
     <header class="pc-head">
@@ -111,7 +104,6 @@
   </div>
 </section>
 
-<!-- Benefícios -->
 <section class="benefits">
   <div class="container">
     <h3 class="benefits-title">Aproveite estes benefícios exclusivos:</h3>

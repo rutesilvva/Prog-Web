@@ -263,35 +263,31 @@
 
 
 .about {
-  margin-top: 70px; // ajuste conforme a altura real da sua navbar
+  margin-top: 70px;
 }
 
 
 
-
-
-/* VINICIUS --- HERO: imagens todas no mesmo tamanho, com fundo branco --- */
 .hero-main .hero-imgwrap {
   width: 100%;
-  height: 400px;          /* reduzido para ocupar menos espaço */
+  height: 400px;    
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #fff;       /* fundo branco para esconder bordas cinzas */
+  background: #fff;  
 }
 
 .hero-main .hero-imgwrap img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain;    /* mostra a imagem inteira sem cortar */
+  object-fit: contain;
   display: block;
 }
 
-/* --- Side cards --- */
 .side.card {
   display: flex;
-  flex-direction: row; /* conteúdo à esquerda, imagem à direita */
+  flex-direction: row;
   align-items: center;
   gap: 12px;
   padding: 12px;
@@ -299,12 +295,12 @@
 .side.card h3, 
 .side.card p, 
 .side.card .add-cart-icon {
-  flex: 1; /* conteúdo ocupa o espaço disponível à esquerda */
+  flex: 1;
 }
 
 .side-imgwrap {
-  flex: 0 0 120px; /* largura fixa do lado direito */
-  height: 160px;   /* mantém altura suficiente para mostrar livro inteiro */
+  flex: 0 0 120px;
+  height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -315,11 +311,10 @@
 .side-imgwrap img {
   max-width: 100%;
   max-height: 100%;
-  object-fit: contain; /* mostra a imagem inteira sem cortar */
+  object-fit: contain;
   display: block;
 }
 
-/* Responsivo */
 @media (max-width: 900px) {
   .hero-main .hero-imgwrap { height: 160px; }
   .side-imgwrap { height: 100px; }
@@ -330,14 +325,13 @@
   .side-imgwrap { height: 90px; }
 }
 
-/* Botão redondo "Adicionar ao carrinho" */
 .add-cart-icon {
   width: 42px;
   height: 42px;
   border-radius: 50%;
   border: none;
-  background: #0b3558;   /* azul */
-  color: #fff;           /* símbolo branco */
+  background: #0b3558;  
+  color: #fff;       
   display: flex;
   align-items: center;
   justify-content: center;
@@ -345,20 +339,18 @@
 }
 
 .add-cart-icon:hover {
-  background: #155a95;   /* azul mais claro no hover */
+  background: #155a95;  
 }
 
 .add-cart-icon .material-icons {
-  font-size: 22px;       /* tamanho do "+" */
+  font-size: 22px;  
 }
 
-/* cada card de produto */
 .p-card {
-  position: relative;   /* referência pro botão ficar dentro */
-  padding-bottom: 50px; /* espaço pro botão não sobrepor o preço */
+  position: relative;   
+  padding-bottom: 50px; 
 }
 
-/* botão redondo de adicionar */
 .p-card .add-cart-icon {
   position: absolute;
   right: 12px;
@@ -385,3 +377,14 @@
 }
 
 
+.p-card a {
+  color: #000;
+  text-decoration: none;
+  font-weight: 400; 
+}
+
+.p-card a h3 {
+  color: #000;
+  text-decoration: none;
+  font-weight: 400; 
+}

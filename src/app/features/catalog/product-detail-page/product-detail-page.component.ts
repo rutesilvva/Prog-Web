@@ -4,6 +4,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductsService, Product } from '../../../core/services/products.service';
 import { CartService } from '../../../../core/services/cart.service';
+import { ToastService } from '../../toast/toast.service';
+
 
 @Component({
   selector: 'app-product-detail-page',
@@ -19,7 +21,8 @@ export class ProductDetailPageComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productsService: ProductsService,
-    private cartService: CartService
+    private cartService: CartService,
+    private toastService: ToastService 
   ) {}
 
   ngOnInit(): void {
@@ -39,6 +42,6 @@ export class ProductDetailPageComponent implements OnInit {
       img: this.product.img
     });
 
-    alert(`${this.qty}x "${this.product.title}" adicionado ao carrinho!`);
+    this.toastService.show(`${this.qty}x "${this.product.title}" adicionado ao carrinho!`, 'success');
   }
 }

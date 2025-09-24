@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { CartService } from '../../../../core/services/cart.service';
+import { ToastService } from '../../toast/toast.service';
 
 interface Product {
   title: string;
@@ -22,7 +23,8 @@ interface Product {
 export class CatalogPageComponent {
   searchTerm = '';
   selectedCategory = '';
-  constructor(private cart: CartService) {}
+  constructor(private cart: CartService, private toast: ToastService) {}
+
 
 
   categories = [
@@ -50,8 +52,9 @@ export class CatalogPageComponent {
     );
   }
 
-  addToCart(p: Product) {
+
+addToCart(p: Product) {
   this.cart.addToCart({ slug: p.slug, title: p.title, price: p.price, img: p.img });
-  alert(`${p.title} foi adicionado ao carrinho!`);
+  this.toast.show(`${p.title} foi adicionado ao carrinho!`, 'success', 2500);
 }
 }

@@ -9,27 +9,61 @@
 
       <label>
         Nome Completo
-        <input type="text" placeholder="Digite seu nome" required />
+        <input
+          type="text"
+          placeholder="Digite seu nome"
+          [(ngModel)]="name"
+          name="name"
+          required
+          style="border: 2px solid #ccc; border-radius: 6px; padding: 6px;"
+        />
       </label>
 
       <label>
         Email
-        <input type="email" placeholder="Digite seu e-mail" required />
-      </label>
-
-      <label>
-        Endereço
-        <input type="text" placeholder="Rua, número e bairro" required />
-      </label>
-
-      <label>
-        Cidade
-        <input type="text" placeholder="Digite sua cidade" required />
+        <input
+          type="email"
+          placeholder="Digite seu e-mail"
+          [(ngModel)]="email"
+          name="email"
+          required
+          style="border: 2px solid #ccc; border-radius: 6px; padding: 6px;"
+        />
       </label>
 
       <label>
         CEP
-        <input type="text" placeholder="00000-000" required />
+        <input
+          type="text"
+          placeholder="00000-000"
+          [(ngModel)]="cep"
+          name="cep"
+          (blur)="lookupCEP()"
+          required
+          style="border: 2px solid #ccc; border-radius: 6px; padding: 6px;"
+        />
+      </label>
+
+      <label>
+        Rua
+        <input
+          type="text"
+          [(ngModel)]="street"
+          name="street"
+          readonly
+          style="border: 2px solid #ccc; border-radius: 6px; padding: 6px; background-color: #f5f5f5;"
+        />
+      </label>
+
+      <label>
+        Cidade
+        <input
+          type="text"
+          [(ngModel)]="city"
+          name="city"
+          readonly
+          style="border: 2px solid #ccc; border-radius: 6px; padding: 6px; background-color: #f5f5f5;"
+        />
       </label>
 
       <h2>Forma de Pagamento</h2>
@@ -44,7 +78,6 @@
     <aside class="checkout-summary">
       <h2>Resumo do Pedido</h2>
 
-      <!-- ALERTA DE SUCESSO -->
       <div class="alert success" *ngIf="orderConfirmed">
         ✅ Pedido confirmado com sucesso! Obrigado por comprar conosco.
       </div>

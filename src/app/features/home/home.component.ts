@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { CartService } from '../../../core/services/cart.service';
+import { ToastService } from '../toast/toast.service';
 
 
 interface HeroSlide {
@@ -13,6 +14,7 @@ interface HeroSlide {
   ctaLink: string;
   img: string;
   alt: string;
+  price: number;
 }
 
 interface Product {
@@ -31,7 +33,10 @@ interface Product {
 })
 export class HomeComponent implements OnInit, OnDestroy {
   year = new Date().getFullYear();
-    constructor(private cartService: CartService) {}
+    constructor(
+    private cartService: CartService,
+    private toastService: ToastService
+  ) {}
 
 
   slides: HeroSlide[] = [
@@ -40,6 +45,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       title: 'Box Machine Learning Essencial',
       desc: 'Conceitos, pipelines e MLOps. Ganhe um e-book bônus em compras acima de R$ 149.',
       priceBadge: 'R$ 99',
+      price: 99,
       ctaText: 'VER BOX',
       ctaLink: '/catalog',
       img: 'https://m.media-amazon.com/images/I/814TXmfTKLL._UF1000,1000_QL80_.jpg',
@@ -52,13 +58,16 @@ export class HomeComponent implements OnInit, OnDestroy {
       ctaText: 'PROGRAMAR AGORA',
       ctaLink: '/catalog',
       img: 'https://m.media-amazon.com/images/I/71aMLMZWutL._UF894,1000_QL80_.jpg',
-      alt: 'Livro de TypeScript e Angular'
+      alt: 'Livro de TypeScript e Angular',
+      price: 110,
+      priceBadge: 'R$ 110',
     },
     {
       eyebrow: 'Infra e nuvem',
       title: 'DevOps & Kubernetes',
       desc: 'CI/CD, observabilidade e boas práticas de containers em cloud.',
       priceBadge: 'R$ 120',
+      price: 120,
       ctaText: 'EXPLORAR TÍTULOS',
       ctaLink: '/catalog',
       img: 'https://m.media-amazon.com/images/I/812I44qv8DL._UF1000,1000_QL80_.jpg',
@@ -117,10 +126,9 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.prodIndex = (this.prodIndex - 1 + this.products.length) % this.products.length;
   }
 
-  addToCart(p: any) {
-  this.cartService.addToCart(p);
-  // feedback simples
-  // (use um snackbar/toast se quiser)
-  alert(`${p.title} foi adicionado ao carrinho!`);
-}
+    addToCart(p: Product) {
+    this.cartService.addToCart(p);
+    // Substitui o alert pelo toast
+    this.toastService.show(`${p.title} foi adicionado ao carrinho!`, 'success');
+  }
 }

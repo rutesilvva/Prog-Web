@@ -1,48 +1,47 @@
-<table *ngIf="items.length > 0" class="cart-table">
-  <thead>
-    <tr>
-      <th>Produto</th>
-      <th>Preço</th>
-      <th>Qtd</th>
-      <th>Total</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of items">
-      <td>
-        <div class="product-info">
-          <img [src]="item.img" alt="{{ item.title }}" class="thumb" />
-          <span>{{ item.title }}</span>
-        </div>
-      </td>
-      <td>{{ item.price | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
-      <td>
-        <input type="number" [value]="item.quantity" min="1"
-               (change)="updateQty(item.slug, $event)">
-      </td>
-      <td>{{ item.price * item.quantity | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
-      <td>
-        <button class="btn-remove" (click)="removeItem(item.slug)">✕</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="cart-container">
+  <table *ngIf="items.length > 0" class="cart-table">
+    <thead>
+      <tr>
+        <th>Produto</th>
+        <th>Preço</th>
+        <th>Qtd</th>
+        <th>Total</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>
+          <div class="product-info">
+            <img [src]="item.img" alt="{{ item.title }}" class="thumb" />
+            <span>{{ item.title }}</span>
+          </div>
+        </td>
+        <td>{{ item.price | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
+        <td>
+          <input type="number" [value]="item.quantity" min="1"
+                 (change)="updateQty(item.slug, $event)">
+        </td>
+        <td>{{ item.price * item.quantity | currency:'BRL':'symbol-narrow':'1.2-2' }}</td>
+        <td>
+          <button class="btn-remove" (click)="removeItem(item.slug)">✕</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<div class="cart-footer">
-  <ng-container *ngIf="items.length > 0; else emptyFooter">
+  <div *ngIf="items.length === 0" class="empty">
+    <span class="material-icons empty-icon">shopping_cart</span>
+    <p>Carrinho Vazio</p>
+  </div>
+
+  <div class="footer-spacer"></div>
+
+  <div class="cart-footer" *ngIf="items.length > 0">
     <h3>Total: {{ total | currency:'BRL':'symbol-narrow':'1.2-2' }}</h3>
     <div class="footer-actions">
       <button class="btn danger" (click)="clearCart()">🗑 Esvaziar</button>
       <button class="btn btn-confirm" (click)="goToCheckout()">✅ Finalizar Compra</button>
     </div>
-  </ng-container>
-
-  <ng-template #emptyFooter>
-    <h3>Seu carrinho está vazio.</h3>
-    <div class="footer-actions">
-      <button class="btn btn-confirm" routerLink="/catalog">🛒 Ir às compras</button>
-    </div>
-  </ng-template>
+  </div>
 </div>
-

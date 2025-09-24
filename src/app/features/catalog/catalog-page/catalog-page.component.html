@@ -15,16 +15,21 @@
 
     <div class="catalog-grid">
       <article class="product-card" *ngFor="let p of filteredProducts">
-        <div class="imgwrap">
-          <img [src]="p.img" [alt]="p.title">
+        <a class="product-media" [routerLink]="'/product/' + p.slug" title="{{ p.title }}">
+          <div class="imgwrap">
+            <img [src]="p.img" [alt]="p.title" />
+          </div>
+        </a>
+        <div class="product-content">
+          <h3 class="product-title">
+            <a [routerLink]="'/product/' + p.slug">{{ p.title }}</a>
+          </h3>
+          <p class="price">{{ p.price | currency:'BRL':'symbol-narrow' }}</p>
         </div>
-        <h3>{{ p.title }}</h3>
-        <p class="price">{{ p.price | currency:'BRL':'symbol-narrow' }}</p>
-        <a class="btn" [routerLink]="'/product/' + p.slug">Ver Detalhes</a>
-        <button class="btn add-cart" (click)="addToCart(p)">
-          <span class="material-icons">add_shopping_cart</span> Adicionar
+
+        <button class="add-cart-icon" (click)="addToCart(p)" aria-label="Adicionar ao carrinho">
+          <span class="material-icons">add</span>
         </button>
-        
       </article>
     </div>
   </div>
