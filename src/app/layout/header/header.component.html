@@ -36,19 +36,19 @@
     <div class="cart-btn">
       <a routerLink="/cart" aria-label="Carrinho">
         <span class="material-icons">shopping_cart</span>
-        <span class="badge" *ngIf="totalQty">{{ totalQty }}</span>
+        <span class="badge" *ngIf="(totalQty$ | async) as q">{{ q }}</span>
       </a>
     </div>
 
     <!-- Autenticação -->
     <div class="auth-btn">
-      <ng-container *ngIf="!user; else loggedIn">
-        <a routerLink="/login">Entrar</a>
+      <ng-container *ngIf="(user$ | async) as user; else loggedOut">
+        <span>Olá, {{ user.name }}</span>
+        <button class="btn-logout" (click)="logout()">Sair</button>
       </ng-container>
 
-      <ng-template #loggedIn>
-        <span>Olá, {{ user?.name }}</span>
-        <button class="btn-logout" (click)="logout()">Sair</button>
+      <ng-template #loggedOut>
+        <a routerLink="/login">Entrar</a>
       </ng-template>
     </div>
   </div>
